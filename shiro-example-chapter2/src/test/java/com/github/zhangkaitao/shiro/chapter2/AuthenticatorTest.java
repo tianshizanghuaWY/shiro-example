@@ -16,6 +16,7 @@ import org.apache.shiro.util.Factory;
 import org.apache.shiro.util.ThreadContext;
 import org.junit.After;
 import org.junit.Test;
+import org.apache.shiro.mgt.SecurityManager;
 
 
 /**
@@ -25,9 +26,15 @@ import org.junit.Test;
  */
 public class AuthenticatorTest {
 
+    /*
+     * AuthenticationStrategy : AllSuccessfulStrategy
+     *   需要所有认证都通过才行
+     * Authenticator : ModularRealmAuthenticator
+     */
     @Test
     public void testAllSuccessfulStrategyWithSuccess() {
         login("classpath:shiro-authenticator-all-success.ini");
+
         Subject subject = SecurityUtils.getSubject();
 
         //得到一个身份集合，其包含了Realm验证成功的身份信息
@@ -60,9 +67,13 @@ public class AuthenticatorTest {
         Assert.assertEquals(1, principalCollection.asList().size());
     }
 
+    /*
+     * 使用自定义 AuthenticatorStrategy
+     */
     @Test
     public void testAtLeastTwoStrategyWithSuccess() {
         login("classpath:shiro-authenticator-atLeastTwo-success.ini");
+
         Subject subject = SecurityUtils.getSubject();
 
         //得到一个身份集合，因为myRealm1和myRealm4返回的身份一样所以输出时只返回一个
@@ -82,11 +93,11 @@ public class AuthenticatorTest {
 
     private void login(String configFile) {
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<org.apache.shiro.mgt.SecurityManager> factory =
+        Factory<SecurityManager> factory =
                 new IniSecurityManagerFactory(configFile);
 
         //2、得到SecurityManager实例 并绑定给SecurityUtils
-        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
 
         //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）

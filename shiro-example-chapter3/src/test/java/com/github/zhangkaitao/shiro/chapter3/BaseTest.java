@@ -23,7 +23,7 @@ public abstract class BaseTest {
     }
 
     protected void login(String configFile, String username, String password) {
-        //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
+        //1、获取 SecurityManager 工厂，此处使用Ini配置文件初始化SecurityManager
         Factory<org.apache.shiro.mgt.SecurityManager> factory =
                 new IniSecurityManagerFactory(configFile);
 

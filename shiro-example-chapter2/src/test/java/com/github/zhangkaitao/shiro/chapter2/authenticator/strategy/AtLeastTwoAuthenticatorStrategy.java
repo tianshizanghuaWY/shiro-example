@@ -15,6 +15,7 @@ import java.util.Collection;
  * <p>User: Zhang Kaitao
  * <p>Date: 14-1-25
  * <p>Version: 1.0
+ * 自定义 AuthenticatorStrategy
  */
 public class AtLeastTwoAuthenticatorStrategy extends AbstractAuthenticationStrategy {
 
