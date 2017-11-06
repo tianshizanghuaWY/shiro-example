@@ -13,6 +13,14 @@ import org.junit.Test;
  */
 public class AuthorizerTest extends BaseTest {
 
+    /*
+     * subject().isPermitted("user1:update")
+     *  ->DelegatingSubject.isPermitted
+     *    ->AuthorizingSecurityManager.isPermitted
+     *      ->ModularRealmAuthorizer.isPermitted
+     *        ->AuthorizingRealm.isPermitted
+     *          ->
+     */
     @Test
     public void testIsPermitted() {
         login("classpath:shiro-authorizer.ini", "zhang", "123");
