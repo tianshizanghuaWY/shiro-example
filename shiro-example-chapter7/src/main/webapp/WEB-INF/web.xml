@@ -47,7 +47,8 @@
     </listener>
     <context-param>
         <param-name>shiroEnvironmentClass</param-name>
-        <param-value>org.apache.shiro.web.env.IniWebEnvironment</param-value><!-- 默认先从/WEB-INF/shiro.ini，如果没有找classpath:shiro.ini -->
+        <!-- 默认先从/WEB-INF/shiro.ini，如果没有找classpath:shiro.ini -->
+        <param-value>org.apache.shiro.web.env.IniWebEnvironment</param-value>
     </context-param>
     <context-param>
         <param-name>shiroConfigLocations</param-name>
